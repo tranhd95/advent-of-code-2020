@@ -136,8 +136,8 @@ masses = """140170
 134171
 104869""".split("\n")
 
-def get_fuel_requirement(input_fuel):
-    return input_fuel // 3 - 2
+# def get_fuel_requirement(input_fuel):
+#     return input_fuel // 3 - 2
 
 total = 0
 
