@@ -3,15 +3,9 @@ input = readlines("files/2.txt")
 function part1(input)
     valid_count = 0
     for line in input
-        tokens = split(line, ":")        
-        range, letter = parse_policy(tokens[1])
-        password = tokens[2]
-        occurences = 0
-        for l in password
-            if l == letter
-                occurences += 1
-            end
-        end
+        policy, pswd = split(line, ":")        
+        range, letter = parse_policy(policy)
+        occurences = count((l -> l == letter), pswd)
         if range[1] ≤ occurences ≤ range[2]
             valid_count += 1
         end
@@ -29,12 +23,9 @@ end
 function part2(input)
     valid_count = 0
     for line in input
-        tokens = split(line, ":")        
-        positions, letter = parse_policy(tokens[1])
-        password = strip(tokens[2])
-        if (length(password) ≥ positions[1] && 
-                (password[positions[1]] == letter || password[positions[2]] == letter) && 
-                password[positions[1]] ≠ password[positions[2]])
+        policy, pswd = split(line, ":")        
+        pos, letter = parse_policy(policy)
+        if (pswd[pos[1]] == letter) ⊻ (pswd[pos[2]] == letter)
             valid_count += 1
         end
     end
