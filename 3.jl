@@ -22,7 +22,8 @@ slopes = [
 ]
     
 function part2(pattern)
-    reduce(*, map(slope -> part1(pattern, slope), slopes))
+    # reduce(*, map(slope -> part1(pattern, slope), slopes))
+    mapreduce(slope -> part1(pattern, slope), *, slopes) # Equivalent but in general execute faster since no intermediate collection needs to be created
 end
     
 println(part2(pattern))
