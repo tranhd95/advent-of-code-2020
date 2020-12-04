@@ -12,12 +12,6 @@ function is_valid(passport)
     required ⊆ keys
 end
 
-function get_pairs(passport)
-    hyphen_removed = replace(passport, "-" => " ")
-    pairs_with_semicolon = split(hyphen_removed, " ")
-    split.(pairs_with_semicolon, ":")
-end
-
 function part2(passports)
     count(is_valid2, passports)
 end
@@ -27,6 +21,12 @@ function is_valid2(passport)
     pairs = get_pairs(passport)
     keys = Set(map(pair -> pair[1], pairs))
     required ⊆ keys && all(is_valid_pair, pairs)
+end
+
+function get_pairs(passport)
+    hyphen_removed = replace(passport, "-" => " ")
+    pairs_with_semicolon = split(hyphen_removed, " ")
+    split.(pairs_with_semicolon, ":")
 end
 
 function is_valid_pair(pair)
@@ -40,10 +40,9 @@ function is_valid_pair(pair)
                         ),
         "hcl" => value -> startswith(value, "#") && 
                         length(value[begin + 1:end]) == 6 &&
-                        all(symbol -> occursin(symbol, "0123456789abcdef"), value[begin + 1:end]),
+                        all(isxdigit, value[begin + 1:end]), # isxdigit (is hex digit) :: Char -> Bool
         "ecl" => value -> value ∈ ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"],
-        "pid" => value -> length(value) == 9 && 
-                        all(digit -> occursin(digit, "0123456789"), value),
+        "pid" => value -> length(value) == 9 && all(isdigit, value), 
         "cid" => _ -> true
     )
     return rules[key](value)
