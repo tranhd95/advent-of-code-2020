@@ -20,8 +20,18 @@ function parse_code(low, high, code)
     low, high
 end
 
+#= Stolen from @Matajon, it's two times faster
+function get_id(pass)
+    arr = split(pass, "")
+    replaced_arr = replace(arr, "F" => "0", "B" => "1", "L" => "0", "R" => "1")
+    binary = join(replaced_arr, "")
+    parse(Int, binary, base=2)
+end =#
+
 # Part 1
-max((PASSES .|> strip .|> get_id)...) |> println
+function part1(passes) 
+    max((passes .|> strip .|> get_id)...) |> println
+end
 
 # Part 2
 function part2(passes)
@@ -35,4 +45,7 @@ function part2(passes)
     end
 end
 
-part2(PASSES) |> println
+@time begin
+    part1(PASSES) |> println
+    part2(PASSES) |> println
+end
