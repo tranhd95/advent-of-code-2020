@@ -34,3 +34,63 @@ end
 count(i -> (4 ≤ i ≤ 6), [2,3,4,5,6]) 
 # 3
 ```
+
+**Function composition**
+
+- https://docs.julialang.org/en/v1/manual/functions/#Function-composition-and-piping
+
+- Function composition
+
+$$
+f(g(h(x))) = (f\circ g \circ h)(x)
+$$
+
+```julia
+# ∘ \circ<tab>
+(sqrt ∘ +)(3, 6) # -> 3.0
+∘(sqrt, +)(3, 6) # -> 3.0
+
+# Multiple functions
+square = x -> x^2
+∘(sqrt, square, sqrt, square)(32) # -> 32.00000000000001
+```
+
+**Unpacking list of arguments**
+
+```julia
+arguments = [sqrt, square, sqrt, square]
+∘(arguments...)(32) # -> 32.00000000000001
+```
+
+**Piping**
+
+- https://docs.julialang.org/en/v1/manual/functions/#Function-composition-and-piping
+
+```julia
+square = x -> x^2
+increment = x -> x+1
+5 |> increment |> square |> print # -> 36
+
+# Elementwise application
+numbers = [1, 2, 3]
+numbers .|> increment .|> square # -> [4, 9 ,16]
+# Equivalent to
+map(x -> x |> increment |> square, numbers)
+```
+
+**Measuring the execution time**
+
+```julia
+@time begin
+    ...
+end
+```
+
+
+
+
+
+
+
+
+

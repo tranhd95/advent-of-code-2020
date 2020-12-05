@@ -9,7 +9,7 @@ function is_valid(passport)
     required = Set(["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"])
     pairs = get_pairs(passport)
     # keys = Set(map(pair -> pair[1], pairs))
-    keys = pairs .|> (pair -> pair[1]) |> Set
+    keys = pairs .|> first |> Set
     required ⊆ keys
 end
 

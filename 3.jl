@@ -7,7 +7,7 @@ function part1(pattern, slope)
     while row ≤ length(pattern)
         trees_count += pattern[row][col] == '#'
         # col = ((col + slope[1]) > row_length) ? (col + slope[1]) - row_length : col + slope[1] 
-        col = ((col + slope[1] - 1) % row_length) + 1 # Matajon++
+        col = ((col + slope[1] - 1) % row_length) + 1 # @martinjonas ++
         row += slope[2]
     end
     trees_count

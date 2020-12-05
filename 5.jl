@@ -20,7 +20,7 @@ function parse_code(low, high, code)
     low, high
 end
 
-#= Stolen from @Matajon, it's two times faster
+#= Stolen from @martinjonas, it's two times faster
 function get_id(pass)
     arr = split(pass, "")
     replaced_arr = replace(arr, "F" => "0", "B" => "1", "L" => "0", "R" => "1")
