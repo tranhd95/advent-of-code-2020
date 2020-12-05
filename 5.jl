@@ -1,7 +1,7 @@
 TEST = ["FBFBBFFRLR", "BFFFBBFRRR", "FFFBBBFRRR", "BBFFBBFRLL"]
 PASSES = readlines("files/5.in")
 
-function get_pass_id(pass)
+function get_id(pass)
     rows = pass[begin:end - 3]
     cols = pass[end - 2:end]
     row_low, row_high = parse_code(0, 127, rows)
@@ -16,24 +16,23 @@ function parse_code(low, high, code)
         else
             low = ceil((low + high) / 2)
         end
-        # println(c, " ", low, " ", high)
     end
     low, high
 end
 
 # Part 1
-max((PASSES .|> strip .|> get_pass_id)...) |> println
+max((PASSES .|> strip .|> get_id)...) |> println
 
 # Part 2
 function part2(passes)
-    sorted = sort(get_pass_id.(strip.(passes)))
+    sorted = passes .|> strip .|> get_id |> sort
     i = 1
     while i < length(sorted)
         if abs(sorted[i + 1] - sorted[i]) > 1
-            return(sorted[i + 1], sorted[i])
+            return sorted[i + 1] - 1
         end
         i += 1
     end
 end
 
-part2(PASSES)
+part2(PASSES) |> println
