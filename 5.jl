@@ -21,4 +21,19 @@ function parse_code(low, high, code)
     low, high
 end
 
-max(get_pass_id.(strip.(PASSES))...)
+# Part 1
+max((PASSES .|> strip .|> get_pass_id)...) |> println
+
+# Part 2
+function part2(passes)
+    sorted = sort(get_pass_id.(strip.(passes)))
+    i = 1
+    while i < length(sorted)
+        if abs(sorted[i + 1] - sorted[i]) > 1
+            return(sorted[i + 1], sorted[i])
+        end
+        i += 1
+    end
+end
+
+part2(PASSES)
