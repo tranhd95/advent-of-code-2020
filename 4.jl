@@ -8,7 +8,8 @@ end
 function is_valid(passport)
     required = Set(["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"])
     pairs = get_pairs(passport)
-    keys = Set(map(pair -> pair[1], pairs))
+    # keys = Set(map(pair -> pair[1], pairs))
+    keys = pairs .|> (pair -> pair[1]) |> Set
     required ⊆ keys
 end
 
@@ -45,7 +46,7 @@ function is_valid_pair(pair)
         "pid" => value -> length(value) == 9 && all(isdigit, value), 
         "cid" => _ -> true
     )
-    return rules[key](value)
+    rules[key](value)
 end
 
 
