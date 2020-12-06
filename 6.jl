@@ -1,8 +1,8 @@
-LINES = readlines("files/6.in")
-ANSWERS = split(join(LINES, "-"), "--")
+groups = split(read("files/6.in", String), "\n\n")
 
 # Part 1
-sum(setdiff.(ANSWERS, '-') .|> length) |> println
+sum(setdiff.(groups, "\n") .|> length) |> println
+
 # Part 2
-groups = split.(ANSWERS, '-')
-mapreduce(group -> intersect((group |> Set)...) |> length, +, groups) |> println
+person_answers = split.(groups, "\n", keepempty=false)
+mapreduce(p -> intersect(p...) |> length, +, person_answers) |> println
