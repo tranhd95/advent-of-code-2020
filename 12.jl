@@ -37,9 +37,9 @@ function part2(actions)
         elseif instruction == 'W'
             w_x -= value
         elseif instruction ∈ ['R', 'L']
-            value = (instruction == 'R') ? deg2rad(-value) : deg2rad(value)
-            R = [cos(value) -sin(value);
-                 sin(value) cos(value)]
+            rads = (instruction == 'R') ? deg2rad(-value) : deg2rad(value)
+            R = [cos(rads) -sin(rads);
+                 sin(rads) cos(rads)]
             w_x, w_y = round.(R * [w_x ;w_y])
         elseif instruction == 'F'
             x += value * w_x
