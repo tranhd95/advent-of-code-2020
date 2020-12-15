@@ -1,5 +1,5 @@
 function part1(numbers, n)
-    seen = Dict()
+    seen = Dict{Int,Int}() # Just by adding the types, it's a magnitude faster
     for (i, num) in enumerate(numbers[1:end - 1])
         seen[num] = i
     end
